@@ -2,12 +2,16 @@ package exam03.models.member;
 
 import exam02.validators.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+@Component
 public class JoinValidator implements Validator<Member> {
 
     private MemberDao memberDao;
 
     @Autowired
+   // @Qualifier("mdao1")
     public void setMemberDao(MemberDao memberDao) {
 
         this.memberDao = memberDao;

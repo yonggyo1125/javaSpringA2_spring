@@ -1,15 +1,16 @@
 package exam03;
 
-
+import exam03.models.member.JoinService;
+import exam03.models.member.Member;
+import exam03.models.member.MemberInfoService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import exam03.config.*;
-import exam03.models.member.*;
 
 import java.time.LocalDateTime;
 
-public class Ex01 {
+public class Ex02 {
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppCtx.class);
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppCtx2.class);
 
         JoinService service = ctx.getBean(JoinService.class);
         MemberInfoService infoService = ctx.getBean("memberInfoService", MemberInfoService.class);
