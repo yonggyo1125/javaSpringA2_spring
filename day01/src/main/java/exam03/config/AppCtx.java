@@ -28,13 +28,13 @@ public class AppCtx {
     public JoinService joinService() {
         return new JoinService();
     }
-
+    /**
     @Bean
     public JoinValidator joinValidator() {
 
-        return new JoinValidator();
+        //return new JoinValidator();
     }
-
+    */
     @Bean
     public MemberInfoService memberInfoService() {
 

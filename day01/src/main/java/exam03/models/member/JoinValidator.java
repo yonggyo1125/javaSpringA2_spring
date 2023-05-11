@@ -10,12 +10,18 @@ public class JoinValidator implements Validator<Member> {
 
     private MemberDao memberDao;
 
-    @Autowired
+    public JoinValidator(MemberDao memberDao) {
+        this.memberDao = memberDao;
+    }
+
+    //@Autowired
    // @Qualifier("mdao1")
+    /**
     public void setMemberDao(MemberDao memberDao) {
 
         this.memberDao = memberDao;
     }
+     */
 
     @Override
     public void check(Member member) {

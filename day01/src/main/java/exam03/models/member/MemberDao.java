@@ -1,13 +1,14 @@
 package exam03.models.member;
 
+import exam03.config.ManualBean;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
+//@ManualBean
 @Repository
-public class MemberDao {
+public class MemberDao { // memberDao
     private static Map<String, Member> members = new HashMap<>();
 
     /**

@@ -13,7 +13,7 @@ public class Ex02 {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppCtx2.class);
 
         JoinService service = ctx.getBean(JoinService.class);
-        MemberInfoService infoService = ctx.getBean("memberInfoService", MemberInfoService.class);
+        MemberInfoService infoService = ctx.getBean(MemberInfoService.class);
 
         Member member = new Member();
         member.setUserId("user01");
