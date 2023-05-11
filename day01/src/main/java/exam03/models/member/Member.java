@@ -1,5 +1,7 @@
 package exam03.models.member;
 
+import java.time.LocalDateTime;
+
 public class Member {
     private String userId;
     private String userPw;
@@ -7,7 +9,11 @@ public class Member {
 
     private String userNm;
 
+    private LocalDateTime regDt;
+
+
     public String getUserId() {
+
         return userId;
     }
 
@@ -39,6 +45,14 @@ public class Member {
         this.userNm = userNm;
     }
 
+    public LocalDateTime getRegDt() {
+        return regDt;
+    }
+
+    public void setRegDt(LocalDateTime regDt) {
+        this.regDt = regDt;
+    }
+
     @Override
     public String toString() {
         return "Member{" +
@@ -46,6 +60,7 @@ public class Member {
                 ", userPw='" + userPw + '\'' +
                 ", userPwRe='" + userPwRe + '\'' +
                 ", userNm='" + userNm + '\'' +
+                ", regDt=" + regDt +
                 '}';
     }
 }

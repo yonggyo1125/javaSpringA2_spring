@@ -18,6 +18,13 @@ public class AppCtx {
 
     @Bean
     public JoinValidator joinValidator() {
+
         return new JoinValidator();
+    }
+
+    @Bean
+    public MemberInfoService memberInfoService() {
+
+        return new MemberInfoService();
     }
 }
