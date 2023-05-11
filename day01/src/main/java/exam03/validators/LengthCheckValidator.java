@@ -1,4 +1,4 @@
-package exam02.validators;
+package exam03.validators;
 
 public interface LengthCheckValidator {
     default void lengthCheck(String str, int min, RuntimeException e) {

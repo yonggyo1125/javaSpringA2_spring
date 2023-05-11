@@ -1,4 +1,4 @@
-package exam02.validators;
+package exam03.validators;
 
 public interface RequiredValidator {
     default void requiredCheck(String str, RuntimeException e) {
