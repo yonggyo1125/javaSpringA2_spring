@@ -1,8 +1,10 @@
 package configs;
 
+import models.emp.EmpDao;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 public class AppCtx {
@@ -20,5 +22,15 @@ public class AppCtx {
         ds.setTimeBetweenEvictionRunsMillis(3000); // 테스트 주기
 
         return ds;
+    }
+
+    @Bean
+    public JdbcTemplate jdbcTemplate() {
+        return new JdbcTemplate(dataSource());
+    }
+
+    @Bean
+    public EmpDao empDao() {
+        return new EmpDao();
     }
 }
