@@ -13,6 +13,15 @@ public class Ex01 {
         long result = cal.factorial(20);
         System.out.println(result);
 
+        result = cal.factorial(20);
+        System.out.println(result);
+
+        result = cal.factorial(20);
+        System.out.println(result);
+
+        result = cal.factorial(20);
+        System.out.println(result);
+
         ctx.close();
 
     }

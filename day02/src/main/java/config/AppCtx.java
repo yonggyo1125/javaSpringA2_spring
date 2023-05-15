@@ -9,6 +9,12 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 //@EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableAspectJAutoProxy
 public class AppCtx {
+
+    @Bean
+    public CachedProxy cachedProxy() {
+        return new CachedProxy();
+    }
+
     @Bean
     public ProxyCalculator proxyCalculator() {
         return new ProxyCalculator();

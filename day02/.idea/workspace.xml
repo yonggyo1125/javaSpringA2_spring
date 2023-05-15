@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="457dc26e-0a68-4749-87e4-1344f4fb66a9" name="Changes" comment="수업 소스">
-      <change afterPath="$PROJECT_DIR$/src/main/java/config/AppCtx.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/config/ProxyCalculator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exam05/Calculator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exam05/RecCalculator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exam05/SimpleCalculator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/Ex01.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/config/CachedProxy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/config/CommonPointcut.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/config/AppCtx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/AppCtx.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/config/ProxyCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/ProxyCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Ex01.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Ex01.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683874539381</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="수업 소스">
+      <created>1683877953370</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1683877953370</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
