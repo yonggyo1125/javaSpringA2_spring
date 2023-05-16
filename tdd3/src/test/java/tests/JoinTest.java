@@ -1,9 +1,6 @@
 package tests;
 
-import models.member.JoinService;
-import models.member.JoinValidationException;
-import models.member.JoinValidator;
-import models.member.Member;
+import models.member.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,8 +14,11 @@ public class JoinTest {
 
     @BeforeEach
     void init() {
+        MemberDao memberDao = new MemberDao();
         JoinValidator validator = new JoinValidator();
-        joinService = new JoinService(validator);
+        validator.setMemberDao(memberDao);
+
+        joinService = new JoinService(memberDao, validator);
     }
 
     private Member getMember() {
@@ -35,6 +35,7 @@ public class JoinTest {
     @DisplayName("회원가입 성공시 예외 발생 없음")
     void joinSuccessTest() {
         Member member = getMember();
+        member.setUserId("user99");
         assertDoesNotThrow(() -> {
             joinService.join(member);
         });
@@ -100,4 +101,39 @@ public class JoinTest {
         );
     }
 
+    @Test
+    @DisplayName("아이디가 6자리 이상, 검증 실패 - JoinValidationException, 문구 - 아이디를 6자리 이상 입력하세요.")
+    void userIdLengthCheckTest() {
+        JoinValidationException thrown = assertThrows(JoinValidationException.class, () -> {
+            Member member = getMember();
+            member.setUserId("user");
+            joinService.join(member);
+        });
+
+        String message = thrown.getMessage();
+        assertTrue(message.contains("아이디를 6자리"));
+    }
+    
+    @Test
+    @DisplayName("비밀번호가 8자리 이상, 검증 실패 - JoinValidationException, 문구 - 비밀번호를 8자리 이상 입력하세요.")
+    void userPwLengthCheckTest() {
+        JoinValidationException thrown = assertThrows(JoinValidationException.class, () -> {
+            Member member = getMember();
+            member.setUserPw("1234");
+            joinService.join(member);
+        });
+
+        String message = thrown.getMessage();
+        assertTrue(message.contains("비밀번호를 8자리 이상"));
+    }
+
+    @Test
+    @DisplayName("아이디 중복이 되면 DuplicateMemberException")
+    void dupicateUserIdTest() {
+        assertThrows(DuplicateMemberException.class, () -> {
+            Member member = getMember();
+            joinService.join(member);
+            joinService.join(member);
+        });
+    }
 }
