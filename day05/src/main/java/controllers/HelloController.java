@@ -1,6 +1,7 @@
 package controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,9 +27,19 @@ public class HelloController {
         return "hello";
     }
     */
+    /**
     @GetMapping("/hello")
     public String hello(@RequestParam(name="nm", required=false) String name) {
         System.out.println(name);
+
+        return "hello";
+    }
+    */
+    @GetMapping("/hello")
+    public String hello(Model model) {
+
+        model.addAttribute("title1", "메세지1");
+        model.addAttribute("title2", "메세지2");
 
         return "hello";
     }

@@ -14,11 +14,7 @@ public class JoinTest {
 
     @BeforeEach
     void init() {
-        MemberDao memberDao = new MemberDao();
-        JoinValidator validator = new JoinValidator();
-        validator.setMemberDao(memberDao);
-
-        joinService = new JoinService(memberDao, validator);
+        joinService = new ServiceManager().getJoinService();
     }
 
     private Member getMember() {
