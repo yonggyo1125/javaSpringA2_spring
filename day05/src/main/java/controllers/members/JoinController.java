@@ -36,7 +36,9 @@ public class JoinController {
     }
     */
     @PostMapping
-    public String joinPs(JoinForm joinForm) {
+    public String joinPs(JoinForm join) {
+        System.out.println(join);
+        // 커맨드 객체 -> EL식 변수 추가 joinForm
 
         return "member/join";
     }
