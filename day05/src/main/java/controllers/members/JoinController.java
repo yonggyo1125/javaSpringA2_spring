@@ -18,17 +18,25 @@ public class JoinController {
     private HttpSession session;
 
     @GetMapping // /member/join
-    public String join() {
+    public String join(Model model) {
+
+        model.addAttribute("joinForm", new JoinForm());
 
         return "member/join";
     }
-
+    /**
     @PostMapping  // /member/join
     public String joinPs(JoinForm joinForm, Model model, HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         System.out.println(requestURI);
         System.out.println(session);
         //model.addAttribute("joinForm", joinForm);
+
+        return "member/join";
+    }
+    */
+    @PostMapping
+    public String joinPs(JoinForm joinForm) {
 
         return "member/join";
     }
