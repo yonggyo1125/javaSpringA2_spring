@@ -1,5 +1,6 @@
 package configs;
 
+import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
@@ -43,7 +44,7 @@ public class MvcConfig implements WebMvcConfigurer {
         templateEngine.setTemplateResolver(templateResolver());
         templateEngine.setEnableSpringELCompiler(true);
         templateEngine.addDialect(new Java8TimeDialect());
-       // templateEngine.addDialect(new LayoutDialect());
+        templateEngine.addDialect(new LayoutDialect());
         return templateEngine;
     }
 
@@ -69,5 +70,11 @@ public class MvcConfig implements WebMvcConfigurer {
 
         return ms;
 
+    }
+
+    @Bean
+    public CommonLib commonLib() {
+
+        return new CommonLib();
     }
 }
