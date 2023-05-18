@@ -15,7 +15,7 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String joinPs() {
+    public String joinPs(JoinForm joinForm) {
 
         return "member/join";
     }
