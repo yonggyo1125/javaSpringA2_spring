@@ -3,17 +3,17 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/main}">
     <main layout:fragment="content">
-        <form method="post" th:action="@{/member/join}">
+        <form method="post" th:action="@{/member/join}" th:object="${joinForm}">
             <dl>
                 <dt>아이디</dt>
                 <dd>
-                    <input type="text" name="userId">
+                    <input type="text" name="userId" th:value="*{userId}">
                 </dd>
             </dl>
             <dl>
                 <dt>비밀번호</dt>
                 <dd>
-                    <input type="password" name="userPw">
+                    <input type="password" name="userPw" th:value="*{userPw}">
                 </dd>
             </dl>
             <dl>
