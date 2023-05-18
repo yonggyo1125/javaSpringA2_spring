@@ -1,7 +1,10 @@
 package controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -9,15 +12,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/member")
 public class MemberController {
     @GetMapping("/join")
-    public String join() {
-
+    public String join(@ModelAttribute JoinForm joinForm) {
+        /**
+        JoinForm joinForm = new JoinForm();
+        model.addAttribute("joinForm", joinForm);
+        */
         return "member/join";
     }
 
     @PostMapping("/join")
-    public String joinPs(JoinForm joinForm) {
+    public String joinPs(JoinForm joinForm, Errors errors) {
+        JoinValidator joinValidator = new JoinValidator();
+        joinValidator.validate(joinForm, errors);
 
-        return "member/join";
+        if (errors.hasErrors()) {
+            return "member/join";
+        }
+
+
+
+        return "redirect:/member/login";
     }
 
     @GetMapping("/login")

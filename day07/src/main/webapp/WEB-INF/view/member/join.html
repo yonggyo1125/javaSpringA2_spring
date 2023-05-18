@@ -7,29 +7,50 @@
             <dl>
                 <dt>아이디</dt>
                 <dd>
-                    <input type="text" name="userId" th:value="*{userId}">
+                    <input type="text" name="userId" th:field="*{userId}">
                 </dd>
             </dl>
             <dl>
                 <dt>비밀번호</dt>
                 <dd>
-                    <input type="password" name="userPw" th:value="*{userPw}">
+                    <input type="password" name="userPw" th:field="*{userPw}">
                 </dd>
             </dl>
             <dl>
                 <dt>비밀번호확인</dt>
                 <dd>
-                    <input type="password" name="userPwRe">
+                    <input type="password" name="userPwRe" th:field="*{userPwRe}">
                 </dd>
             </dl>
             <dl>
                 <dt>회원명</dt>
                 <dd>
-                    <input type="text" name="userNm">
+                    <input type="text" name="userNm" th:field="*{userNm}">
+                </dd>
+            </dl>
+            <dl>
+                <dt>주소</dt>
+                <dd>
+                    <input type="text" name="zipcode" th:field="*{address.zipcode}">
+                    <br>
+                    <input type="text" name="addr1" th:field="*{address.addr1}">
+                    <br>
+                    <input type="text" name="addr2" th:field="*{address.addr2}">
+                </dd>
+            </dl>
+            <dl>
+                <dt>취미</dt>
+                <dd>
+                    <input type="checkbox" name="hobby" value="취미1" th:field="*{hobby}">
+                    취미1
+                    <input type="checkbox" name="hobby" value="취미2" th:field="*{hobby}">
+                    취미2
+                    <input type="checkbox" name="hobby" value="취미3" th:field="*{hobby}">
+                    취미3
                 </dd>
             </dl>
             <div>
-                <input type="checkbox" name="agree" value="true" id="agree">
+                <input type="checkbox" name="agree" value="true" id="agree" th:field="*{agree}">
                 <label for="agree">약관에 동의합니다.</label>
             </div>
             <button type="submit">가입하기</button>
