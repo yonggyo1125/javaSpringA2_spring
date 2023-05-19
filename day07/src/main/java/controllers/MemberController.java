@@ -1,14 +1,12 @@
 package controllers;
 
 import models.member.MemberJoinService;
+import models.member.MemberLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -21,7 +19,14 @@ public class MemberController {
     private JoinValidator joinValidator;
 
     @Autowired
+    private LoginValidator loginValidator;
+
+    @Autowired
     private Optional<MemberJoinService> opt;
+
+    @Autowired
+    private MemberLoginService loginService;
+
 
     @GetMapping("/join")
     public String join(@ModelAttribute JoinForm joinForm) {
@@ -49,18 +54,26 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public String login(@ModelAttribute LoginForm loginForm) {
-
+    public String login(@ModelAttribute LoginForm loginForm,
+                        @CookieValue(required=false, name="saveId") String sId) {
+        System.out.println(sId);
+        if (sId != null) {
+            loginForm.setUserId(sId);
+            loginForm.setSaveId(true);
+        }
         return "member/login";
     }
 
     @PostMapping("/login")
     public String loginPs(@Valid LoginForm loginForm, Errors errors) {
+        loginValidator.validate(loginForm, errors);
 
         if (errors.hasErrors()) {
             return "member/login";
         }
 
+        // 로그인 처리
+        loginService.login(loginForm);
 
         return "redirect:/"; // 메인페이지
     }
