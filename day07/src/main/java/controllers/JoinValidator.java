@@ -14,6 +14,22 @@ public class JoinValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         JoinForm joinForm = (JoinForm) target;
+
+        /**
+         * 1. 아이디의 중복 여부 -> 이미 가입된 경우 X
+         * 2. 비밀번호, 비밀번호 확인의 일치 여부
+         */
+        String userId = joinForm.getUserId();
+        String userPw = joinForm.getUserPw();
+        String userPwRe = joinForm.getUserPwRe();
+
+
+        // 2. 비밀번호, 비밀번호 확인의 일치 여부
+        if (userPw != null && !userPw.isBlank()
+                && userPwRe != null && !userPwRe.isBlank() && !userPw.equals(userPwRe)) {
+            errors.rejectValue("userPwRe", "Incorrect");
+        }
+
         /** 필수 항목 체크 - userId, userPw, userPwRe, userNm */
         /**
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userId", "required");

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/member")
 public class MemberController {
@@ -21,7 +23,7 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String joinPs(JoinForm joinForm, Errors errors) {
+    public String joinPs(@Valid JoinForm joinForm, Errors errors) {
         JoinValidator joinValidator = new JoinValidator();
         joinValidator.validate(joinForm, errors);
 

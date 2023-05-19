@@ -56,6 +56,7 @@
             <div>
                 <input type="checkbox" name="agree" value="true" id="agree" th:field="*{agree}">
                 <label for="agree">약관에 동의합니다.</label>
+                <div th:each="err : ${#fields.errors('agree')}" th:text="${err}"></div>
             </div>
             <button type="submit">가입하기</button>
         </form>
