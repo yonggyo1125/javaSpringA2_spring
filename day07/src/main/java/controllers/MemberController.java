@@ -49,14 +49,19 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(@ModelAttribute LoginForm loginForm) {
 
         return "member/login";
     }
 
     @PostMapping("/login")
-    public String loginPs() {
+    public String loginPs(@Valid LoginForm loginForm, Errors errors) {
 
-        return "member/login";
+        if (errors.hasErrors()) {
+            return "member/login";
+        }
+
+
+        return "redirect:/"; // 메인페이지
     }
 }

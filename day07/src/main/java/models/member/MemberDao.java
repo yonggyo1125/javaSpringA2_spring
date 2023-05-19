@@ -2,6 +2,7 @@ package models.member;
 
 import controllers.JoinForm;
 import lombok.RequiredArgsConstructor;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -19,8 +20,11 @@ public class MemberDao {
         String sql = "INSERT INTO MEMBER (USERNO, USERID, USERPW, USERNM) " +
                     "VALUES (MEMBER_SEQ.nextval, ?, ?, ?)";
 
+        String userPw = joinForm.getUserPw();
+        String hash = BCrypt.hashpw(userPw, BCrypt.gensalt(10));
+
         int cnt = jdbcTemplate.update(sql,
-                    joinForm.getUserId(), joinForm.getUserPw(), joinForm.getUserNm());
+                    joinForm.getUserId(), hash, joinForm.getUserNm());
 
         return cnt > 0;
     }

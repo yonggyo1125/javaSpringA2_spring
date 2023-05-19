@@ -45,6 +45,10 @@ public class JoinValidator implements Validator {
             errors.rejectValue("userPwRe", "Incorrect");
         }
 
+
+       // errors.reject("testErrors", "테스트 공통 오류!!!");
+
+
         /** 필수 항목 체크 - userId, userPw, userPwRe, userNm */
         /**
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userId", "required");
