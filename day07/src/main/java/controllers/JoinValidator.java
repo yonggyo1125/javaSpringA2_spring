@@ -1,10 +1,20 @@
 package controllers;
 
+import models.member.MemberDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+@Component
 public class JoinValidator implements Validator {
+
+    private MemberDao memberDao;
+
+    @Autowired
+    public void setMemberDao(MemberDao memberDao) {
+        this.memberDao = memberDao;
+    }
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -22,6 +32,11 @@ public class JoinValidator implements Validator {
         String userId = joinForm.getUserId();
         String userPw = joinForm.getUserPw();
         String userPwRe = joinForm.getUserPwRe();
+
+        // 1. 아이디의 중복 여부 -> 이미 가입된 경우 X
+        if (userId != null && !userId.isBlank() && memberDao.exists(userId)) {
+            errors.rejectValue("userId", "Duplicate.member");
+        }
 
 
         // 2. 비밀번호, 비밀번호 확인의 일치 여부

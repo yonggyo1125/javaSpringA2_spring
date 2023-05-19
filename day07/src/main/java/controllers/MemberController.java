@@ -1,5 +1,6 @@
 package controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -13,6 +14,10 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
+
+    @Autowired
+    private JoinValidator joinValidator;
+
     @GetMapping("/join")
     public String join(@ModelAttribute JoinForm joinForm) {
         /**
@@ -24,7 +29,6 @@ public class MemberController {
 
     @PostMapping("/join")
     public String joinPs(@Valid JoinForm joinForm, Errors errors) {
-        JoinValidator joinValidator = new JoinValidator();
         joinValidator.validate(joinForm, errors);
 
         if (errors.hasErrors()) {
