@@ -40,7 +40,7 @@ public class MemberDao {
     public boolean exists(String userId) {
 
         String sql = "SELECT COUNT(*) FROM MEMBER WHERE USERID = ?";
-        long cnt = jdbcTemplate.queryForObject(sql, Long.class);
+        long cnt = jdbcTemplate.queryForObject(sql, Long.class, userId);
 
         return cnt > 0;
     }

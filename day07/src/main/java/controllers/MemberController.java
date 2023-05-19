@@ -1,5 +1,6 @@
 package controllers;
 
+import models.member.MemberJoinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/member")
@@ -17,6 +19,9 @@ public class MemberController {
 
     @Autowired
     private JoinValidator joinValidator;
+
+    @Autowired
+    private Optional<MemberJoinService> opt;
 
     @GetMapping("/join")
     public String join(@ModelAttribute JoinForm joinForm) {
@@ -35,6 +40,9 @@ public class MemberController {
             return "member/join";
         }
 
+        // 회원가입 처리
+        MemberJoinService joinService = opt.get();
+        joinService.join(joinForm);
 
 
         return "redirect:/member/login";
