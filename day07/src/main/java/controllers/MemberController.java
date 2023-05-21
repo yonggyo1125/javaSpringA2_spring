@@ -77,4 +77,24 @@ public class MemberController {
 
         return "redirect:/"; // 메인페이지
     }
+
+    @GetMapping("/list")
+    public String members(@ModelAttribute @Valid SearchForm searchForm, Errors errors) {
+
+        return "member/list";
+    }
+
+    @GetMapping("/info/{id}")
+    public String info(@PathVariable(required=false, name="id") String userId) {
+        System.out.println(userId);
+
+        boolean result = true;
+        if (result) {
+            throw new RuntimeException("예외 발생 합니다...");
+        }
+
+        return "member/info";
+    }
+
+
 }
