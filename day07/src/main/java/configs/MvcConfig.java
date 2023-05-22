@@ -2,12 +2,15 @@ package configs;
 
 import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.servlet.config.annotation.*;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.spring5.SpringTemplateEngine;
@@ -18,6 +21,9 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 @EnableWebMvc
 @Import(DbConfig.class)
 public class MvcConfig implements WebMvcConfigurer {
+
+    @Value("${file.upload.path}")
+    private String fileUploadPath;
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -31,6 +37,9 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/");
+
+        registry.addResourceHandler("/uploads/**")
+                .addResourceLocations("file:///D:/uploads/");
     }
 
     @Bean
@@ -100,5 +109,15 @@ public class MvcConfig implements WebMvcConfigurer {
     @Bean
     public CommonInterceptor commonInterceptor() {
         return new CommonInterceptor();
+    }
+
+
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer properties(){
+        PropertySourcesPlaceholderConfigurer conf = new PropertySourcesPlaceholderConfigurer();
+
+        conf.setLocations(new ClassPathResource("application.properties"));
+
+        return conf;
     }
 }
