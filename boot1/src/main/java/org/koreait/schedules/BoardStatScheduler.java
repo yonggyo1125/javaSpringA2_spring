@@ -11,5 +11,6 @@ public class BoardStatScheduler {
     @Scheduled(cron="*/5 * * * * *") // 5초 마다 실행
     public void process() {
         //log.info("5초 마다 실행!");
+        //boardDao.processStat();
     }
 }
