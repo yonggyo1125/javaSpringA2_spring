@@ -25,6 +25,9 @@ public class MvcConfig implements WebMvcConfigurer {
     @Value("${file.upload.path}")
     private String fileUploadPath;
 
+    @Value("${thymeleaf.cache}")
+    private String cacheable;
+
     @Autowired
     private ApplicationContext applicationContext;
 
@@ -39,7 +42,7 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/");
 
         registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:///D:/uploads/");
+                .addResourceLocations("file:///" + fileUploadPath);
     }
 
     @Bean
@@ -48,7 +51,7 @@ public class MvcConfig implements WebMvcConfigurer {
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/view/");
         templateResolver.setSuffix(".html");
-        templateResolver.setCacheable(false);
+        templateResolver.setCacheable(Boolean.parseBoolean(cacheable));
         return templateResolver;
     }
 
