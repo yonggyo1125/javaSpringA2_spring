@@ -53,4 +53,11 @@ public class BoardController {
 
         return "board/view";
     }
+
+    @ResponseBody
+    @GetMapping("/list2")
+    public List<Board> list2() {
+        List<Board> items = listService.gets();
+        return items;
+    }
 }
