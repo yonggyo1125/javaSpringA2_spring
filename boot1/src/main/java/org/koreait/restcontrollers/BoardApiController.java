@@ -1,22 +1,27 @@
 package org.koreait.restcontrollers;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
+import org.koreait.controllers.board.BoardForm;
 import org.koreait.models.board.Board;
 import org.koreait.models.board.BoardDao;
 import org.koreait.models.board.BoardListService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.koreait.models.board.BoardSaveService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
+@Log
 @RestController
 @RequestMapping("/api/board")
 @RequiredArgsConstructor
 public class BoardApiController {
 
     private final BoardListService listService;
+    private final BoardSaveService saveService;
     private final BoardDao boardDao;
 
     @GetMapping("/list")
@@ -42,5 +47,24 @@ public class BoardApiController {
     public String hello() {
 
         return "안녕하세요!";
+    }
+
+    /**
+    @PostMapping("/write")
+    public void write(@RequestBody BoardForm boardForm) {
+
+        log.info(boardForm.toString());
+        saveService.save(boardForm);
+    }
+    */
+
+    @PostMapping("/write")
+    public ResponseEntity<BoardForm> write(@RequestBody BoardForm boardForm) {
+
+        saveService.save(boardForm);
+
+        //return ResponseEntity.status(HttpStatus.CREATED).body(boardForm); // 응답 바디 O
+        //return ResponseEntity.status(HttpStatus.CREATED).build(); // 응답 바디 X
+        return ResponseEntity.created(URI.create("/board/list")).build();
     }
 }
