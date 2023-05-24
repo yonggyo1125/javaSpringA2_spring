@@ -2,6 +2,7 @@ package org.koreait.restcontrollers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import org.koreait.commons.rest.JSONResult;
 import org.koreait.controllers.board.BoardForm;
 import org.koreait.models.board.Board;
 import org.koreait.models.board.BoardDao;
@@ -23,12 +24,22 @@ public class BoardApiController {
     private final BoardListService listService;
     private final BoardSaveService saveService;
     private final BoardDao boardDao;
-
+    /**
     @GetMapping("/list")
     public List<Board> list() {
         List<Board> items = listService.gets();
 
         return items;
+    }
+    */
+    @GetMapping("/list")
+    public ResponseEntity<JSONResult<List<Board>>> list() {
+        List<Board> items = listService.gets();
+        JSONResult<List<Board>> jsonResult = new JSONResult<>();
+        jsonResult.setSuccess(true);
+        jsonResult.setData(items);
+
+        return ResponseEntity.ok(jsonResult);
     }
 
     @GetMapping("/view/{id}")
@@ -65,6 +76,9 @@ public class BoardApiController {
 
         //return ResponseEntity.status(HttpStatus.CREATED).body(boardForm); // 응답 바디 O
         //return ResponseEntity.status(HttpStatus.CREATED).build(); // 응답 바디 X
-        return ResponseEntity.created(URI.create("/board/list")).build();
+        //return ResponseEntity.created(URI.create("/board/list")).build();
+        return ResponseEntity.noContent().build();
     }
+
+
 }
