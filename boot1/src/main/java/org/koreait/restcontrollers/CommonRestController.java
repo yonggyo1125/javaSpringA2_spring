@@ -1,5 +1,6 @@
 package org.koreait.restcontrollers;
 
+import org.koreait.commons.CommonException;
 import org.koreait.commons.rest.JSONResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,11 @@ public class CommonRestController {
     public ResponseEntity<JSONResult<Object>> errorHandler(Exception e) {
 
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+
+        if (e instanceof CommonException) {
+            CommonException commonException = (CommonException)e;
+            status = commonException.getStatus();
+        }
 
         JSONResult<Object> jsonResult = new JSONResult<>();
         jsonResult.setSuccess(false);
